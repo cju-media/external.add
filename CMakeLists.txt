@@ -46,6 +46,7 @@ if(APPLE)
     set(CODE_SIGN_IDENTITY "-" CACHE STRING "Code signing identity for macOS (default: ad-hoc)")
 
     add_custom_command(TARGET simple_add POST_BUILD
+        COMMAND xattr -cr "$<TARGET_FILE_DIR:simple_add>/../.."
         COMMAND codesign --force --deep -s "${CODE_SIGN_IDENTITY}" "$<TARGET_FILE_DIR:simple_add>/../.."
         COMMENT "Signing bundle with identity: ${CODE_SIGN_IDENTITY}"
     )
