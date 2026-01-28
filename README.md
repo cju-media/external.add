@@ -39,6 +39,30 @@ To build this external, you need the Max SDK.
 
 4.  The output file (`simple_add.mxo` on macOS or `simple_add.mxe64` on Windows) will be generated. Copy this file to your Max packages or externals folder.
 
+### macOS Code Signing
+
+The build process automatically performs ad-hoc code signing (`codesign -s -`), which is sufficient for local development.
+
+If you wish to sign with a specific Developer ID (required for distribution), you can specify it when running CMake:
+
+```bash
+cmake -DMAX_SDK_PATH=/path/to/max-sdk -DCODE_SIGN_IDENTITY="Developer ID Application: Your Name (ID)" ..
+```
+
+### Troubleshooting: System Security Policy
+
+If you encounter an error like "cannot be loaded due to system security policy" when loading the external in Max on macOS, try the following:
+
+1.  **Clear Quarantine Attributes**: Run this command in the terminal on the generated `.mxo` bundle:
+    ```bash
+    xattr -cr simple_add.mxo
+    ```
+
+2.  **Resign Manually**: If the automatic signing failed or was invalid:
+    ```bash
+    codesign --force --deep -s - simple_add.mxo
+    ```
+
 ## Usage
 
 1.  Create a new object in Max patcher.

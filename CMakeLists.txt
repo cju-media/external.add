@@ -42,6 +42,14 @@ if(APPLE)
     # Linker flags for Mac (lookup symbols at runtime)
     set_target_properties(simple_add PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
 
+    # Code Signing
+    set(CODE_SIGN_IDENTITY "-" CACHE STRING "Code signing identity for macOS (default: ad-hoc)")
+
+    add_custom_command(TARGET simple_add POST_BUILD
+        COMMAND codesign --force --deep -s "${CODE_SIGN_IDENTITY}" "$<TARGET_FILE_DIR:simple_add>/../.."
+        COMMENT "Signing bundle with identity: ${CODE_SIGN_IDENTITY}"
+    )
+
 elseif(WIN32)
     add_definitions(-DWIN_VERSION -DEXT_WIN_VERSION -DMAXAPI_USE_MSCRT)
 
