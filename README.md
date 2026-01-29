@@ -82,3 +82,33 @@ If you encounter an error like "cannot be loaded due to system security policy" 
             |
             |
        [ number ]
+
+# Jitter Stream External
+
+The `jit.stream` object streams Jitter matrix video data to an RTMP server using FFmpeg.
+
+## Requirements
+
+*   **FFmpeg**: Must be installed and available in the system PATH.
+
+## Usage
+
+1.  Instantiate `jit.stream`.
+2.  Set the `@url` attribute to your RTMP endpoint.
+3.  Send a `jit_matrix` (video frame) to the input.
+
+### Attributes
+
+*   `@url` (symbol): The RTMP URL to stream to (e.g., `rtmp://localhost/live/stream`).
+*   `@framerate` (float): The target framerate for the stream (default: 30.0).
+*   `@bitrate` (int): The target video bitrate in kbits/s (default: 2500).
+
+### Supported Formats
+
+*   Currently supports `char` matrices with 1 (Gray), 3 (RGB), or 4 (ARGB) planes.
+
+### Example
+
+[ jit.movie ]
+     |
+[ jit.stream @url rtmp://server/app/key @framerate 60 ]
