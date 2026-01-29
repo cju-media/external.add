@@ -4,7 +4,6 @@
  */
 
 #include "jit.common.h"
-#include "jit.matrix.h"
 
 #ifdef WIN_VERSION
 #define popen _popen
