@@ -19,6 +19,10 @@ set(JIT_INCLUDES "${MAX_SDK_PATH}/c74support/jit-includes")
 
 include_directories(${MAX_INCLUDES} ${MSP_INCLUDES} ${JIT_INCLUDES})
 
+# Debug: Print includes
+message(STATUS "MAX_INCLUDES: ${MAX_INCLUDES}")
+message(STATUS "JIT_INCLUDES: ${JIT_INCLUDES}")
+
 # Source files
 set(SOURCES src/simple_add.c)
 set(SOURCES_STREAM src/jit.stream.c)
