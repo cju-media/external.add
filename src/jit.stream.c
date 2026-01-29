@@ -3,6 +3,8 @@
  * @brief A Max/Jitter external to stream video data to an RTMP server using FFmpeg.
  */
 
+#include "ext.h"
+#include "ext_obex.h"
 #include "jit.common.h"
 
 #ifdef WIN_VERSION
